@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from camera_manager.views import index
+
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('camera_manager.urls')),
+    path('', index, name='index'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
