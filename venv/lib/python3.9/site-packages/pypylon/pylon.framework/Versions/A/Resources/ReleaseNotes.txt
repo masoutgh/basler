@@ -1,0 +1,706 @@
+﻿pylon 8 Software Suite for macOS
+
+RELEASE NOTES
+
+Note: Intermediate versions for macOS are not released publicly.
+      All changes made in intermediate versions are included in the current
+      version of pylon.
+
+################################################################################
+
+RELEASE DATE:    2025-03-14
+
+VERSION:         8.1.0 (macOS)
+
+################################################################################
+
+
+BINARY COMPATIBILITY
+====================
+* pylon C++ SDK = 10.2.1: Applications built with 10.1.x or earlier 10.x.x
+                          versions of the pylon C++ SDK are compatible.
+
+
+NEW FEATURES / CHANGES
+======================
+* GigE: [321337] Added new macOS Network Extension app that filters GigE image
+        packets in an early state.
+* General: [315491] Added support for macOS Universal Binaries (Apple Silicon
+           and Intel).
+* pylon C++ SDK: [322697] Fixed a problem when running EltAppender with .NET
+                 applications.
+* pylon C++ SDK: [321225, 321223] Added support for JPEG file format.
+* pylon C++ SDK: [321226, 321224] Added support for BMP file format .
+* pylon C++ SDK: [323481] The CBaslerUniversalInstantCamera class has been
+                 updated.
+* pylon C++ SDK: [324026] Added version suffix to GenICam libraries.
+* pylon C++ SDK: [324026] Added back channel server to allow runtime
+                 configuration of the Basler logging system (EltAppender / pylon
+                 Event Logger).
+* pylon C++ SDK: [321363] Improved the error handling for decompression and the
+                 documentation.
+* GenTL: [323605] The DeviceInfo object of a GEV/blaze GenTL enumeration now
+         holds the correct values for the entries of IP address, MAC address,
+         subnet mask, default gateway, and device manufacturer info.
+* GenTL: [326394] Chunk data aren't fetched anymore if no chunks are available.
+* pylon Event Logger: [323553] Changed log4j.category.basler to
+                    log4j.category.FgSdk.
+* pylon Event Logger: [321118] Added launch profiles to configure the launched or
+                    running logging application.
+* pylon Event Logger: [320249] Improved the handling of adding new log messages in
+                    the message view. There used to be a lag when updating the
+                    message view which meant that several new messages were
+                    added at the same time. Now, new messages are added one by
+                    one, creating a smoother experience.
+* pylon Event Logger: [320856] Improved status names, tooltips, and other user
+                    interface text.
+* pylon Event Logger: [320418] Fixed an issue with the performance of display
+                    filters.
+* pylon Event Logger: [320312] Display and highlight filter settings can now be
+                    imported and exported.
+* pylon Event Logger: [319932] Maximum number of messages in view can now be
+                    configured.
+* pylon Event Logger: [320428] Changed the log levels enabled by default in the
+                    activity view to WARN, ERROR, AND UNKNOWN.
+* pylon Event Logger: [319443] Added the Scroll to End button in the navigation
+                    view.
+* pylon Event Logger: [319447] Improved the scrolling behavior in the message
+                    view.
+* pylon Event Logger: [319890] Added the Not Equals and Not Contains operators to
+                    the Display/Highlight Filter dialogs.
+* pylon Event Logger: [319441] If multiple properties files are detected, a
+                    warning is now displayed.
+* pylon Event Logger: [319892] Added the Export Graph command in the Capture menu.
+* pylon Event Logger: [319928] Scrolling or using other navigation features in the
+                    message view, disables the Autoscroll to End option.
+* pylon Event Logger: [319439] Updated icons in the navigation view.
+
+
+CORRECTIONS
+===========
+* pylon Viewer: [322017] Fixed CTRL+C shortcut always copying the histogram /
+                line profile data when those panes are present and docked.
+* pylon Viewer: [321363] Fixed high CPU load that occurred when grabbing dark
+                images.
+* pylon Viewer: [305905] Updated the icons of the Firmware Updater.
+* pylon Viewer: [319360] Fixed a bug where you couldn't move the line of the
+                Line Profile feature when the Sharpness Indicator was enabled.
+* pylon C++ SDK: [316618] Fixed a potential deadlock in the EltAppender when
+                 closing pylon.
+* pylon C++ SDK: [321363] Provided a fix to avoid getting compression
+                 information from an already decompressed grab payload.
+* pylon Event Logger: [321046] Fixed an issue where the properties file wasn't
+                    created when starting the pylon Event Logger.
+* pylon Event Logger: [321028] Fixed some path handling issues.
+* pylon Event Logger: [321207] The Settings dialog is now unavailable while the
+                    pylon Event Logger is capturing messages.
+* pylon Event Logger: [320195] Disabled searching in the navigation view when the
+                    status of the pylon Event Logger is Capturing or Cleared.
+* pylon Event Logger: [319933] Disabled the Start and Launch Logging Source option
+                    until the active process has finished or produced an error.
+* pylon Event Logger: [319120] Fixed an issue that caused an error to be displayed
+                    in the notification view when creating a filter group from
+                    an active filter.
+* pylon Event Logger: [319516] Session directory will now be deleted when a
+                    session is cleared.
+* pylon Event Logger: [319446] When closing the pylon Event Logger while there is
+                    unsaved data in the message view, a warning is displayed
+                    allowing the user to save the data.
+* pylon Event Logger: [315944] Fixed the text color of notifications in dark mode.
+* pylon Event Logger: [315370] Fixed the default directory for open and save
+                    dialogs. Now, the user's root directory is used.
+
+
+RESTRICTIONS
+============
+* pylon Viewer: A new image throttle has been implemented in the pylon Viewer to
+                improve overall stability and performance. This introduces a new
+                restriction which affects the video recording feature of the
+                pylon Viewer. Allowing only 250 images per second and camera in
+                the imaging pipeline limits the ability to record every frame
+                when exceeding this limit.
+* pylon Viewer: The Color Calibrator does not support all Basler color cameras.
+                Due to a different camera feature set, Basler dart and boost V
+                cameras are not supported.
+* pylon Viewer: Under certain circumstances, e.g., a very slow or busy computer,
+                the Color Calibrator may not work if the camera has already been
+                opened in the pylon Viewer. To prevent this, close the camera
+                before using the Color Calibrator.
+* pylon Viewer: Images grabbed by Stereo ace 2 cameras can't be displayed yet.
+* Workbench: Using multiple pin data views actively displaying data in the
+             Workbench may cause
+             an increase of the CPU load and degradation of the overall
+             performance. Basler
+             recommends using fewer pin data views whenever possible.
+* Workbench: The Statistics feature of the Workbench measures the execution
+             times of vTools.
+             The times measured in the Statistics feature may vary depending on
+             the configuration of your
+             system and the overall CPU load. This is so, because CPUs may run
+             with different frequencies
+             depending on the current load (e.g., due to dynamic frequency
+             scaling).
+* vTools: Sometimes, loading compressed recipes fails. Until there is a
+          workaround, avoid working with compressed recipes.
+* pylon C++ SDK: Some ace 2 cameras may use a Boolean parameter instead of the
+                 usual enumeration for event notifications. The following code
+                 snippets can be used to work around this issue. For C++ you can
+                 use: CBooleanParameter(camera.GetNodeMap(),
+                 "EventNotification").TrySetValue(true); in addition to:
+                 camera.EventNotification.TrySetValue(EventNotification_On);
+* GigE: For optimum use of Basler's ace 2 5GigE and 1GigE cameras, Basler
+        recommends using dual-channel DDR4-3600 RAM or better. Using slower RAM
+        may cause buffer underruns and image loss. In addition, Basler
+        recommends using the pylon GigE Configurator tool to optimize the
+        complete setup.
+* GenTL: Limited GenTL support for producers with GenTL version 1.4 and below.
+* MP4: Recording of video files with cameras with resolutions of 20 MP or higher
+       may fail, if the Quality parameter is set to 80 % or more. As a
+       workaround, set the Quality parameter to a lower value.
+* MP4: The Recording feature doesn't support the Compression Beyond feature in
+       ace 2 Pro cameras. When recording is started and the Compression Beyond
+       feature is enabled, the pylon Viewer first disables the Compression
+       Beyond feature in the camera and then starts recording.
+* GenTL/GigE: The GenTL producer for GigE Vision does not support action
+              commands.
+* GenTL/GigE: The GenTL producer for GigE Vision does not support multicast
+              configurations.
+
+
+
+
+################################################################################
+
+RELEASE DATE:       2021-03-09
+
+VERSION:            6.2.0 (Intel 64-bit; macOS 10.13, 10.14, 10.15, 11.1)
+
+################################################################################
+
+BINARY COMPATIBILITY
+====================
+Applications built with earlier versions of pylon are incompatible with pylon 6.2.0.
+
+
+NEW FEATURES / CHANGES
+======================
+* General: [190199] Added support for macOS Big Sur (11.1). 
+           Note: Applications built on Intel 64-bit machines can be run on both x86-64 
+           and ARM processors. Building of applications on ARM machines is not 
+           supported yet.
+* 3D: [177711] Added support for the GenICam Generic Data Container (GenDC) version 
+      1.1.0. 
+* 3D/SDK: [180153] Added support for GenDC to the pylon C++ API.
+* GigE Vision: [170862] The effect of the Auto Packet Size feature has been improved 
+               when used on ace 2 cameras.
+* SDK: [189665] New parameters for Basler ace 2, dart, and boost cameras have been
+       added to the CBaslerUniversalInstantCamera class.
+* SDK: [185786] Added a new sample to demonstrate the use of the SerialCommunication 
+       feature (UART) available on ace 2 cameras.
+* SDK: [159212] Added DNG to the CImagePersistence class to support saving Bayer 
+       pictures in DNG file format.
+* SDK: [181930] Added CPylonDataContainer and CPylonDataComponent classes to 
+       access multi-component grab results.
+* SDK: [189825] Added support for the Data32f pixel type, i.e., PFNC data 32-bit 
+       floating point, to the pylon C++ API.
+* SDK: [189971] A pylon image can return a previously attached user buffer to a C++ 
+       interface now.
+* pylon Viewer: [164903] The pylon Viewer GUI tools have been updated to QT 5.12.8.
+* pylon Viewer: [173865] The Vignetting Correction feature has been adapted to support
+                MED ace cameras with a new binning selector parameter value.
+* pylon Viewer: [183612] The Vignetting Correction feature has been adapted to support
+                ace 2 and boost cameras with a new binning selector parameter value.
+* pylon Viewer: [183913] The exposure time slider in the Features pane has been adapted 
+                to display the exposure time range correctly when using Ultra Short mode 
+                on ace 2 cameras.
+* pylon Viewer: [183912] The Bandwidth Manager reports missed frames as errors for USB 
+                cameras. 
+* pylon Viewer: [187441, 158011] The Feature Documentation pane offers C++ source code 
+                snippets for related Selector features now.
+* pylon Viewer: [181775] The naming format for recording sequences of still images has
+                been changed.
+* pylon Viewer: [184587] Some common tasks in the Features pane have been updated.
+* General: [191112] The pylon SDK Samples Manual has been updated.
+* General: [181771] The pylon End-User License Agreement has been updated.
+* BPD: [190192] Updated the offline Basler Product Documentation to version 45.
+
+
+CORRECTIONS
+===========
+* GenTL: [172316] Fixed an issue in the ProducerU3V.cti and ProducerGEV.cti producers, 
+         where EventGetData could return custom error code -10001 instead of
+         GC_ERR_BUFFER_TOO_SMALL when the buffer passed was too small.
+* GenTL: [184792] The access mode of the InterfaceUpdateList has been changed to 
+         write-only.
+* GigE Vision  [158474] Unicasts and directed broadcasts, of ActionCommands and
+        ScheduledActionCommands, are only sent if the request subnet matches the
+        subnet of the IP address. This will reduce unexpected delays if a
+        gateway or routing is required.
+* GigE Vision: [165200] Improved the discovery of cameras with different IP 
+        configurations.
+* USB: [167347] Error messages reported by the LibUsb are reported correctly now.
+* SDK: [187278] The trigger selector is reset to its original value after applying 
+       a configuration.
+* SDK: [190889] Fixed an issue where the image acquisition could stop when the program 
+       has run for a very long period.
+* SDK: [179416] Device accessibility information has been added to the C++ programmer's 
+       guide.
+* SDK: [181927] The C++ programmer's guide has been corrected in regard to creating specific 
+       cameras in pylon.
+* SDK: [186772] Include guards have been added to ImageDecompressor.h.
+* pylon Viewer: [183914] The histogram calculation is only performed when the histogram 
+                pane is active now.
+* pylon Viewer: [187440, 176297] The Light Device Brightness slider in the Features pane 
+                has been adapted to correctly display the brightness range when using the 
+                Basler SLP Strobe Controller. 
+* pylon Viewer: [182085] The position of GigE cameras in the Devices pane does not change 
+                anymore after enumeration. 
+* pylon Viewer: [189875] The pylon Viewer can grab images after changing the IP address of 
+                the network adapter without having to close and reopen the pylon Viewer. 
+                The refresh button must be clicked before opening the camera if Auto-Scan 
+                is disabled.
+* pylon Viewer: [189905] Fixed an issue with the "Don't show this dialog again" option in 
+                the Bandwidth Manager.
+
+
+RESTRICTIONS
+=========================
+* Setup: If the *.pkg package fails to install, right-click the *.pkg package and select 
+         Open to continue. This may occur if macOS can’t read the Basler certificate.
+* SDK: Some ace 2 cameras may use a boolean parameter instead of the usual enumeration 
+       for event notifications. The following code snippets can be used to work around 
+       this issue.
+       For C++ you can use:
+         CBooleanParameter(camera.GetNodeMap(), "EventNotification").TrySetValue(true);
+       in addition to:   
+         camera.EventNotification.TrySetValue(EventNotification_On);
+* GigE Vision: On some macOS Catalina versions, e.g., 10.15.4, the camera enumeration in the 
+       pylon Viewer or the pylon API may take longer than 60 seconds. To prevent that either 
+       use an older macOS version or check for future macOS updates.
+* pylon Viewer: The pylon Viewer requires macOS version 10.13 or newer.
+* pylon Viewer: To use the pylon Viewer, you must install the latest Mesa OpenGL driver for
+        your system. 
+* pylon Viewer: Clicking Reset Window Layout while running the pylon Viewer in full-screen mode, 
+        will minimize the pylon Viewer and the image window may disappear and become undocked. 
+        You may need to stop/start the image acquisition to display the image window again. 
+        To avoid this, Basler recommends using the Reset Window Layout feature only when the 
+        pylon Viewer is not in full-screen mode.
+* IP Configurator: The IP Configurator tool requires macOS version 10.12 or newer.
+* GigE Vision: Multiple IP configurations on a single network interface are not
+       fully supported by the IP Configurator tool. 
+* GenTL: The GenTL producer for GigE Vision does not support action commands.
+* GenTL: The GenTL producer for GigE Vision does not support multicast configurations.
+* BPD: When using the offline Basler Product Documentation with the Safari browser on macOS 
+       Catalina 10.15.x, the forwarding to the BPD and any internal links will not work correctly. 
+       To fix the forwarding issue, choose Safari > Preferences > Advanced. Select “Show Develop 
+       menu in menu bar”. In the Safari menu bar, choose Develop > Disable Cross-Origin Restrictions.
+* BPD: The Basler Product Documentation requires advanced JavaScript support. Please
+       use a modern browser, e.g., Firefox 44 (or higher), or Chrome 49 (or higher).
+
+
+
+
+################################################################################
+
+RELEASE DATE:       2020-05-12
+
+VERSION:            6.1.2 (Intel 64-bit; macOS 10.13, 10.14, 10.15)
+
+################################################################################
+
+BINARY COMPATIBILITY
+=========================
+Applications built with earlier versions of pylon are incompatible with pylon 6.1.2.
+
+
+NEW FEATURES / CHANGES
+=========================
+* General: [153884] Added support for macOS Catalina (10.15).
+* GenTL: [153884] A GenTL producer is now available that allows using Basler cameras 
+         (GigE or USB 3.0) with applications supporting GenTL. 
+         The producer is compliant with GenTL 1.5. 
+* GenTL: [127826] Added support for image decompression for Basler ace 2 Pro GigE Vision and
+         USB3 Vision cameras that support the Compression Beyond feature. The pylon GigE Vision
+         and USB3 Vision GenTL producers will now automatically decompress the image data before
+         transferring it to any 3rd party GenTL consumers.
+* pylon Viewer: [139283] Added a new 'Welcome to pylon' dialog that contains the Data Privacy,
+                New Features, and Learn More pages.
+* pylon Viewer: [137047] Added a new Data Privacy feature. This feature is part of the Basler
+                product improvement program.
+* pylon Viewer: [144658] Added a new pylon introduction video. The video can be accessed in the
+                'Welcome to pylon' dialog on the Learn More page. To open the dialog, click
+                Help > New features > Learn More.
+* pylon Viewer: [85311] Added the Sharpness Indicator feature which makes focusing
+                of lenses easier.
+* pylon Viewer: [70176] Added the Action Commands feature to facilitate the evaluation
+                and integration of GigE Action Commands and Scheduled Action Commands.
+* pylon Viewer: [68123] Added the Vignetting Correction feature which can remove
+                vignetting artifacts (loss of brightness at the edges of images).
+                The Vignetting Correction feature is available on selected ace L and ace U camera
+                models only.
+* pylon Viewer: [100601] Added an SDK samples manual.				
+* pylon Viewer: [139275] Added statistics information in the status bar related the Compression Beyond
+                feature of Basler ace 2 Pro cameras.
+* pylon Viewer: [151374] The pylon Viewer now also shows GigE Vision cameras with incorrect IP
+                configuration.
+* pylon Viewer: [149595] Changed the default layout of the pylon Viewer. The Message Log pane is
+                now docked on the right side of the pylon Viewer main window.
+* pylon Viewer: [133892] Save/Load Features are now inactive during image acquisition.
+* pylon Viewer: [108546] Changed the docking mechanism for dockable panes, e.g.,
+                Sharpness Indicator, Histogram, etc.
+* pylon Viewer: [66666] The slider control for the Exposure Time camera parameter
+                now uses a logarithmic scale.
+* pylon Viewer: [120403] Camera event data, e.g., Exposure End Event, is displayed
+                in the feature tree now.
+* pylon Viewer: [132170] An option to restore the window layout to default settings
+                has been added in the Window menu.
+* pylon Viewer: [109495] Added the Show Cameras Only option in the Devices pane.
+                When selected, all transport layers and interfaces are hidden
+                and only camera devices are displayed.
+* pylon Viewer: [126270] The File Access feature now returns interactive feedback
+                when uploading large amounts of user data, e.g., vignetting
+                correction files.
+* pylon Viewer: [123228] The pylon Viewer has been optimized for monitors with 4k
+                and higher resolution.
+* pylon Viewer: [129616] All icons in the toolbar, menus, panes, and tools have
+                been updated.			
+* pylon Viewer: [108521] Recording settings can now be found in the new Recording
+                Settings pane that can be opened via the Window menu.
+* pylon Viewer: [121964] The User Level control in the Features pane has been removed.
+                The Features pane now always shows all parameters of the selected
+                camera.
+* pylon Viewer: [127346] The pylon Viewer (Monitor Mode) used for multicasting
+                with GigE cameras has been removed. Instead, right-click the
+                desired GigE camera in the Devices pane of the pylon Viewer and
+                click Open Device... > Monitor Mode to run the pylon Viewer in
+                Monitor Mode.
+* pylon Viewer: [123255] The Crosshair and Grid view options has been moved from
+                the View menu to Tools > Options.
+* pylon Viewer: [133876] After changing the device user ID of GigE cameras, the pylon
+                Viewer now displays the new device user ID after refreshing the Devices tree.
+* pylon Viewer: [139161] The pylon Viewer returns additional information when loading of
+                camera features has failed.
+* pylon Viewer: [139115] Added the shortcut CTRL+ALT+SHIFT+L for deleting the GenICam cache.
+                The GenICam cache may need to be deleted when an error condition has been
+                cached that prevents the proper operation of the pylon Viewer.
+* pylon Viewer: [139115] Added the shortcut CTRL+ALT+SHIFT+F7 that works as a toggle for switching
+                off/switching on the display of images in pylon Viewer. Image acquisition must be
+                running when the shortcut is initially used (switching off image display).
+* pylon Viewer: [153055] The Polling option in the Features pane is disabled by default now.
+* SDK: [136913] Added support for image decompression for Basler ace 2 Pro GigE Vision and USB3
+       Vision cameras that support the Compression Beyond feature.
+* SDK: [100038] Added CBaslerUniversalInstantCamera class, including support classes.
+       This Universal Instant camera class provides users with a native parameter API
+       that can be used for any interface.
+* SDK: [100038] Added new samples showing the use of CBaslerUniversalInstantCamera
+       and changed existing samples to show the use of parameter classes.
+* SDK: [100038] Extended the C++ Programmer's Guide to include CBaslerUniversalInstantCamera
+       and parameter classes.
+* SDK: [108723] The pylon Migration Mode supports Basler ace 2 GigE cameras now.
+       The migration mode allows you to easily adapt existing applications
+       that were written for GigE cameras based on GenICam SFNC 1.x so
+       that they work with GigE cameras based on SFNC 2.x as well, e.g.,
+       Basler ace 2 GigE cameras.
+* SDK: [139226] Added the Utility_IpConfig sample, which illustrates how to configure the IP
+       address of GigE cameras. In addition, this sample can be used to automatically and
+	   programmatically configure multiple GigE Vision cameras.
+* SDK: [127827] Added the Utility_ImageDecompressor sample, which illustrates how to enable
+       the compression feature in Basler ace 2 Pro cameras and how to decompress the images
+	   using the CImageDecompressor class.
+* SDK: [144475] New parameters for Basler ace 2 Pro camera and the Basler SLP Controller have been
+       added to the CBaslerUniversalInstantCamera class.
+* SDK/USB3: [149732] A new stream grabber statistic parameter called “Statistic_Out_Of_Memory_Error_Count”
+            has been added. It provides information about insufficient memory on the host.
+* SDK: [136974] Added GetBufferSize() function to GrabResultData and GrabResult to query the
+       actual size of the grab result buffer.
+* SDK: [136974] Added additional enumeration entries with correct GrabStatus_ prefix to EGrabStatus
+       to conform with the naming scheme of enumerations. Old entries can still be used for
+       backwards compatibility.
+* SDK: [100038] Added parameter classes for simplifying access to GenApi parameters,
+       e.g., CIntegerParameter.
+       These can be used instead of GenApi::CXYZPtr classes.
+* SDK: [100038] Changed the existing configuration classes, e.g., CAcquireContinuousConfiguration,
+       to use new parameter classes.
+* SDK: [100038] Access methods and keys of transport layer-specific device info
+       classes have been merged into CDeviceInfo.
+* SDK: [102881] The image format converter now also supports the PixelType_YCbCr422_8_YY_CbCr_Semiplanar
+       and PixelType_YCbCr420_8_YY_CbCr_Semiplanar input formats.
+* SDK: [121880] Buffers can be cleared (filled with 0) using the ClearBufferModeEnable
+       parameter of the InstantCamera class.
+* SDK: [120870] Calling AcquisitionStart and AcquisitionStop in InstantCamera can be enabled
+       or disabled using the parameter AcquisitionStartStopExecutionEnable of the
+       InstantCamera class.
+* SDK: [133422] If the DeviceUserID of the camera is empty, an empty UserDefinedName entry
+       will be added to the DeviceInfo object.
+* SDK: [132430] Added missing documentation for CTlFactory functions.
+* USB3: [55923] The Libusb error memory limit handling has been improved.
+* GigE Vision: [126099] Added mapping of YCbCr422_8 pixel type to
+                Pylon::PixelType_YUV422_YUYV_Packed in GigE Vision transport layer
+                for ace 2 GigE cameras.
+* CamEmu: [102456] CamEmu now also supports BayerGR8, BayerRG8, BayerGB8, and
+          BayerBG8 pixel formats.
+* BPD: [152178] Updated the Basler Product Documentation to version 33.
+
+
+DISCONTINUATION NOTICE
+=========================
+* SDK: [120489] All device-specific InstantCamera classes, e.g.,
+                CBaslerGigEInstantCamera, have been deprecated. Please consider
+                using CBaslerUniversalInstantCamera instead.
+* SDK: [120489] All device-specific device info classes, e.g.,
+                CBaslerGigEDeviceInfo, have been deprecated. You can use
+                CDeviceInfo instead.
+* SDK: [120489] All device-specific C++ samples have been removed. These samples
+                are replaced by the Universal C++ samples.
+* SDK: [120489] All Low Level camera classes, e.g., BaslerGigECamera, have been
+                deprecated.
+                Please consider using CBaslerUniversalInstantCamera instead.
+* SDK: [120489] All legacy C++ samples have been removed.
+
+
+MIGRATION NOTICE
+=========================
+* With pylon 6.1.1, the following deprecated enumerations have been removed:
+
+    Deprecated       Use instead
+    ----------------------------
+    PixelType        EPixelType
+    PixelColorFilter EPixelColorFilter
+    AccessMode       EDeviceAccessMode
+    EOwnership       ECleanup
+    PayloadType      EPayloadType
+    GrabStatus       EGrabStatus
+    waitex_result_t  EWaitExResult
+
+* In the GrabResult class, GetFrameNumber() has been deprecated. Use GetBlockID() instead.
+* In the InstantCamera class in the ECleanup enumeration, the Ownership_ExternalOwnership and
+  Ownership_TakeOwnership members have been removed. Use Cleanup_None and Cleanup_Delete instead.
+* The BaslerCLSerDeviceClass device class has been removed. Use BaslerCameraLinkDeviceClass instead.
+* The IpCamDeviceClass device class has been removed. Use BaslerIpCamDeviceClass instead.
+* The IsValidRGB(EPixelType pixelType) helper function has been deprecated. Use the IsRGB
+  and IsRGBA functions instead. However, this is no exact replacement.
+* The IsValidBGR(EPixelType pixelType) helper function has been deprecated. Use the IsBGR
+  and IsBGRA functions instead. However, this is no exact replacement.
+* The PS_Undefined enumeration value has been deprecated. Instead, use the more secure BitPerPixel
+  function which throws exceptions.
+* The PixelSize(EPixelType pixelType) helper function has been deprecated. Use the BitDepth
+  and BitPerPixel functions instead. However, this is no exact replacement.
+* The following typedefs have been removed:
+
+    Deprecated       Use instead
+    ----------------------------
+    char8_t          int8_t
+    uchar8_t         uint8_t
+    pcchar8_t        const char *
+    pchar8_t         char *
+
+
+CORRECTIONS
+=========================
+* pylon Viewer: [105607] Fixed issues when using the Color Calibrator tool on
+  GigE cameras and cameras with auto functions enabled, e.g., ExposureAuto. In
+  the second step, the image is now displayed in black and white to achieve better
+  calibration results.
+* pylon Viewer: [96663] Replaced parentheses and spaces in file names with an underscore
+  when recording a sequence of still images.
+* pylon Viewer: [89451] The default setting of the Histogram pane is now linear
+  scale instead of logarithmic.
+* pylon Viewer: [91757] Fixed an issue where the pylon Viewer could become unresponsive
+  when grabbing with high frame rates.
+* pylon Viewer: [88327] Fixed issues with file suffix and file type options when
+  using the Load/Save features in Japanese language.
+* pylon Viewer: [88327] Fixed an issue with file suffix when using the Histogram
+  feature in Japanese language.
+* pylon Viewer: [88327] The grid overlay can now be displayed in full-screen mode.
+* GigE Vision: [115981, 137745, 139280] Fixed an issue where changing the system clock
+               could cause the GEV hearbeat timeout to expire unexpectedly.
+* GigE Vision: [96678] Fixed an issue where in rare cases the EnumerateDevices
+               call could never return when grabbing images in parallel.
+* USB3: [140726] Fixed a race condition that could lead to crashes when using USB cameras.
+* SDK: [139672] PFS files can be loaded across all platforms now.
+* SDK: [113396] Fixed an issue where cameras not supporting the Exposure End
+       event, e.g., dart and racer, caused an unhandled exception in
+       the Grab_UsingExposureEndEvent sample.
+* SDK: [121881] Fixed an issue where the buffer size determined by reading the
+       PayloadSize feature of the camera device and the stream grabber
+       could be too high when using the instant camera in conjunction
+       with a frame grabber.
+* SDK: [67178] Fixed an issue where the pylon C++ Programers Guide did not show all instant
+       camera classes correctly.
+* SDK: [133483] Fixed getting the alternative integer representation from float parameters.
+* SDK: [127836] Added additional validity checks on input parameters for functions taking
+       GrabResultPtr or IImage parameters.
+* SDK: [100534] Fixed a race condition that could lead to crashes when using PixelTypeConverter
+       from multiple threads.
+* CamEmu: [105594] Fixed an issue where the PayloadSize has not been updated correctly.
+* BPD: [88433, 91101] Fixed issues when using the BPD offline version.
+
+
+RESTRICTIONS
+=========================
+* Setup: If the *.pkg package fails to install, right-click the *.pkg package and select Open 
+  to continue. This may occur if macOS can’t read the Basler certificate.
+* GigE Vision: On some macOS Catalina versions, e.g., 10.15.4, the camera enumeration in the 
+  pylon Viewer or the pylon API may take longer than 60 seconds. To prevent that either use an 
+  older macOS version or check for future macOS updates.
+* pylon Viewer: The pylon Viewer requires macOS version 10.13 or newer.
+* pylon Viewer: To use the pylon Viewer, you must install the latest Mesa OpenGL driver for
+  your system. 
+* pylon Viewer: Clicking Reset Window Layout while running the pylon Viewer in full-screen mode, 
+  will minimize the pylon Viewer and the image window may disappear and become undocked. 
+  You may need to stop/start the image acquisition to display the image window again. 
+  To avoid this, Basler recommends using the Reset Window Layout feature only when the pylon Viewer 
+  is not in full-screen mode.
+* IP Configurator: The IP Configurator tool requires macOS version 10.12 or newer.
+* GigE Vision: Multiple IP configurations on a single network interface are not
+  fully supported by the IP Configurator tool. 
+* GenTL: The GenTL producer for GigE Vision does not support action commands.
+* GenTL: The GenTL producer for GigE Vision does not support multicast configurations.
+* BPD: When using the offline Basler Product Documentation with the Safari browser on macOS 
+  Catalina 10.15.x, the forwarding to the BPD and any internal links will not work correctly. 
+  To fix the forwarding issue, choose Safari > Preferences > Advanced. Select “Show Develop 
+  menu in menu bar”. In the Safari menu bar, choose Develop > Disable Cross-Origin Restrictions.
+* BPD: The Basler Product Documentation requires advanced JavaScript support. Please
+  use a modern browser, e.g., Firefox 44 (or higher), or Chrome 49 (or higher).
+	  
+	  
+	  
+################################################################################
+
+RELEASE DATE:       2018-11-06
+
+VERSION:            5.1.1 (Intel 64-bit; macOS 10.12, 10.13, 10.14)
+
+################################################################################
+
+BINARY COMPATIBLITY
+=========================
+Applications built with earlier versions of pylon are incompatible with pylon 5.1.1.
+
+
+NEW FEATURES / CHANGES
+=========================
+* General: [58637] Added support for macOS Sierra (10.12), macOS High Sierra (10.13) and 
+  macOS Mojave (10.14).
+* General: [83753] The GenICam GenApi and FirmwareUpdate libraries have been updated
+  to GenICam Package Version 2018.06.
+* General: [89519] The pylon Viewer GUI Tools have been updated to QT 5.9.
+* pylon Viewer: [85569] Added a histogram pane.
+* pylon Viewer: [83752] A crosshair and grid can now be displayed in an image.
+* pylon Viewer: [64888] Added the Bandwidth Manager to the Tools menu. The Bandwidth Manager supports GigE 
+  and USB 3.0 cameras.
+* pylon Viewer: [67994] When used with GigE cameras the Bandwidth Manager will use 1500 as the lowest Packet 
+  Size parameter value. The Frame Transmission Delay parameter value has been optimized as well.
+* pylon Viewer: [83673] Added support for recording of image sequences.
+* pylon Viewer: [71213] Added a color calibration tool that allows easy color configuration
+  of Basler MED ace cameras. The Color Calibrator only becomes available in the pylon Viewer (Tools menu 
+  or context menu of the camera) when a Basler MED ace camera is connected.
+* pylon Viewer: [59746] The pylon Viewer feature tree now offers a search function.  
+* pylon Viewer: [77502] The user interface has been localized into Simplified
+  Chinese, Japanese, and Korean. Languages can be switched in the pylon Viewer -> Preferences menu.
+* pylon Viewer: [70359] Tooltips and feature descriptions have been localized into multiple 
+  languages. Updated the layout of the Feature Documentation pane.
+* pylon Viewer: [72578, 83488] Added translations of tooltips and descriptions of
+  Host Transport Layer, Stream Parameters, and Image Format Conversion features in
+  the Feature Documentation pane.
+* pylon Viewer: [64819] Added a link to pylon IP Configurator in the Tools menu.
+* pylon Viewer: [64818] Added a link to "C++ Programmer's Guide" in the help menu.
+* pylon Viewer: [87509] Camera emulation support can be enabled via the pylon Viewer -> Preferences menu.
+* pylon Viewer: [55223] Images can now be saved in raw image format.
+* pylon Viewer: [64142] The pylon Viewer now displays chunk data provided by the camera.
+* pylon Viewer: [64822] Renamed "Transport Layer" to "Host Transport Layer".
+* pylon Viewer: [64783] The Basler logo is now displayed in the image display area.
+* pylon Viewer: [71709] The New Feature dialog can now accommodate more than one new feature.
+* pylon Viewer: [81066] Added icons for Contact Basler Support and About pylon Viewer
+  menu options.
+* pylon Viewer: [78685] The Submit Feedback option can now be accessed via the context
+  menus of cameras and features.
+* pylon Viewer: [86851] Split the View menu into View and Window menus and rearranged
+  the menu options accordingly.
+* GigE Vision: [77502] The user interface of the pylon IP Configurator has been
+  localized into Simplified Chinese, Japanese, and Korean. Languages can be switched
+  in the pylon Viewer -> Preferences menu.
+* SDK: [55223] pylon API now allows saving images in raw image format.
+* SDK: [66609] The features of nodemaps provided by pylon objects can be made persistent.
+* SDK: [54208] Added Extend option to the InconvertibleEdgeHandling parameter of the CImageFormatConverter class.
+  With this option, rows and columns that cannot be converted are extrapolated for Bayer images.  
+* SDK: [88328] Updated static API header files.
+* SDK: [71535] Replaced std::bitset from AccessModeSet with an alternative implementation
+  (DeviceAccessMode.h).
+* BPD: [68866] The Basler Product Documentation (offline and online) can be accessed directly from 
+  tools of the pylon Software Suite. The offline Basler Product Documentation can also be opened directly
+  from the Applications directory.
+* CamEmu: [71079] The camera emulation stream grabber loads images from directories sorted by 
+  file name in ascending order.
+
+
+CORRECTIONS
+=========================
+* pylon Viewer: [82191] The DeviceReset parameter is now available in Features tree.
+* pylon Viewer: [67625] Rearranged options in Tools and Camera menus.
+* pylon Viewer: [97454] The maximum display rate has been limited to 25 Hz.
+* SDK: [97536] Adapted the project files settings of the pylon SDK samples to Xcode version 9.x.
+* SDK: [71536] Added explicit destructors in certain C++ API classes.
+* SDK: [65985] Fixed an issue where the camera enumeration failed when using Objective-C and dynamic linking.
+* SDK: [70066] Fixed an issue where IsMono() / IsColorImage() returned true for PixelType_Undefined.
+* SDK: [70363] Fixed the signature of the ConfigurationEventPrinter::OnGrabError method in the C++ sample code.
+* SDK: Fixed the format of lists in the CImageFormatConverter documentation.
+* SDK: Fixed an issue where the waiting in a WaitObject instance could be interrupted.
+* GigE Vision: [69822] Fixed an issue where under certain conditions the stream grabber used a wrong port number.
+  This would eventually cause effects like devices being removed or streaming of other cameras being stopped.
+* GigE Vision: [70515] Fixed an issue where the stream grabber would crash when starting the grabbing failed.
+* GigE Vision: Fixed an issue where the IP address and the port in the IP configuration settings of the
+  stream grabber were always zero initially.
+* GigE Vision: Fixed an issue where changing the heartbeat timeout did not work.
+* USB3: [78905] Fixed hard-coding of vendor name. Now, the vendor name provided by
+  the camera device is used.
+* USB3: [59128] Changed the Grab_UsingSequencer sample because after turning on the sequencer
+  when using newer camera models, the pixel format cannot be changed anymore.
+
+
+RESTRICTIONS
+=========================
+* pylon Viewer: The pylon Viewer requires macOS version 10.12 or newer.
+* pylon Viewer: If the Polling option in the Features pane is enabled while displaying
+  a continuous image stream, there may be a stutter noticeable in the image stream.
+  Disable polling to avoid this effect.
+* IP Configurator: The IP Configurator tool requires macOS version 10.12 or newer.
+* GigE Vision: Multiple IP configurations on a single network interface are not
+  fully supported by the IP Configurator tool. 
+* Under certain circumstances, e.g., a very slow or busy computer,
+  the Color Calibrator may not work if the camera has already been opened in the pylon Viewer.
+  To prevent this, close the camera before using the Color Calibrator.
+* BPD: When using the offline Basler Product Documentation with the Safari browser, internal links 
+  will not work correctly. To fix that, choose Safari > Preferences > Advanced. Select “Show Develop 
+  menu in menu bar”. In the Safari menu bar, choose Develop > Disable Cross-Origin Restrictions.
+* BPD: The Basler Product Documentation requires advanced JavaScript support. Please
+  use a modern browser, e.g., Firefox 44 (or higher), or Chrome 49 (or higher).
+
+
+
+################################################################################
+
+RELEASE DATE:       2016-08-17
+
+VERSION:            5.0.5 (Intel 64-bit; OS X 10.10, 10.11)
+
+################################################################################
+
+BINARY COMPATIBLITY
+=========================
+Initial Release
+
+
+NEW FEATURES / CHANGES
+======================
+Initial Release
+
+
+CORRECTIONS
+===========
+Initial Release
+
+
+RESTRICTIONS
+============
+
